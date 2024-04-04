@@ -1,0 +1,29 @@
+<div class="app-container">
+    <h2 class="header">To-do app</h2>
+
+    <div class="input-container">
+        <input type="string" [(ngModel)]='todo' />
+        <button class="button btn-add" (click)="addTodos(todo)">Add</button>
+    </div>
+
+
+    <div class="todo-container">
+        <div *ngFor="let todo of todos, let i = index">
+            <div class="todo-details">
+                <div *ngIf= "(editIndex !== i)">{{todo}}</div>
+                <div>
+                    <input *ngIf= "editIndex === i" type="text" [(ngModel)]='updateTodo' />
+                    <button  class = "button btn-edit" *ngIf= "(editIndex !== i)"
+                        (click)= "editIndex = i; updateTodo = todo">Edit</button>
+                    <button class="button btn-save" *ngIf= "editIndex === i" (click)= "handleEdit(i, updateTodo)">Save</button>
+                    <button class="button btn-cancel" *ngIf= "editIndex === i" (click)= "editIndex = null">Cancel</button>
+                    <button class="button btn-delete" (click)= "removeTodos(i)">Delete</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
